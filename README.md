@@ -1,3 +1,6 @@
+## NOTE
+This code assumes that the supplied zip file is unzipped and the data file is placed in the working directory of R
+
 ## Introduction
 
 This assignment uses data from
