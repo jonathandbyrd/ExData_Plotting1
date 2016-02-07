@@ -43,9 +43,13 @@ makeTidyData <- function() {
         
         ## only get the data corresponding to 01-Feb-2007 to 02-Feb-2007
         ## add tidy header vars to dataset
-        energyData <- read.table("household_power_consumption.txt", header = FALSE, sep = ";"
-                                 , quote = "", as.is = TRUE, na.strings = "?", stringsAsFactors = FALSE,
-                                 skip = 66637, nrows = (69518 - 66638), col.names = header)
+        fileName <- file("household_power_consumption.txt")
+        
+        energyData <- read.table(text = grep("^[1-2]/2/2007", readLines(fileName), value = TRUE), 
+                                 header = FALSE, sep = ";", quote = "", as.is = TRUE, 
+                                 na.strings = "?", stringsAsFactors = FALSE, col.names = header)
+        
+        close(fileName)
         
         ## convert the Date column to Date class
         energyData$date <- as.Date(energyData$date, "%d/%m/%Y")
